@@ -1,0 +1,79 @@
+---
+title: "Homework 1"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{setspace} 
+---
+\onehalfspacing
+
+* * * 
+
+### Instructions
+
+- This homework is due in Gradescope on Wednesday Jan 17 by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. Any work submitted past this period is considered late.  
+
+- Please answer the following questions in the order in which they are posed. 
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (Joint PMF) An urn contains four red chips, three white chips,
+and two blue chips. A random sample of size 3 is drawn
+without replacement. Let $X$ denote the number of white
+chips in the sample and $Y$ the number of blue chips. Write
+a formula for the joint PMF of $X$ and $Y$. Be sure to explain the components of your formula and why it makes sense. 
+
+    *Hint*: You will first want to make a table on scratch paper to understand the possible values for $x$ and $y$ and their corresponding probabilities. Then the formula for the PMF will be evident
+    
+2. (Trinomial) Let $U_1,U_2, . . . ,U_{1029}$ be independent
+uniformly distributed random variables on the interval $[0,1)$. Let $X$ equal the number of $U_i$ less than
+.331, and $Y$ equal the number between .331 and .820.
+
+
+   a. Calculate, using R, the probability of observing $X = 354, Y = 492$. Be sure to show your code in a code chunk and report the probability in a complete sentence using inline code. 
+   
+   b. Calculate, using R, the expected values and standard deviation of $Y$? Be sure to show your code in a code chunk. State the marginal distribution before launching into calculations.
+   
+3. (Marginal PMF) Let $X$ and $Y$ be discrete random variables with joint PMF 
+$$f(x, y) = \left(\frac{\lambda}{2} \right)^{y} \frac{e^{-\lambda}}{x! \:(y-x)!}$$
+
+   where $x$ and $y$ are (non-negative) integers and $0 \leq x \leq y$. That is, $x, y = 0, 1, 2, 3, \dots$ but with the constraint $0 \leq x \leq y$.
+
+   Determine $f_2(y)$, the marginal distribution of $Y$. Is this a familiar distribution? Show the steps.
+   
+    *Hint*: you will need to use the Binomial theorem with a = 1 and b = 1 to perform the summation over $x$. 
+
+4. (Hierarchical model) Suppose a player is equally likely to have 4, 5 or 6 at-bats (opportunities to bat) in a baseball game. If $X$ is the number of opportunities to bat, then we are assuming that
+$$f_1(x) = P(X = x) = \frac{1}{3}, \ \ \ x = 4, 5,6.$$
+Suppose $Y$, the number of hits, is a Binomial random variable with size $X = x$ and probability of success $\pi=0.3$. That is 
+$$f(y|x) = P(Y = y | X = x) = Binom(x, 0.3).$$
+ 
+a. Fill in the numbers for the joint PMF, $f(x,y) = P(X = x, Y = y)$ in the cells indicated by (i) -- (v). Also fill in the number for the marginal PMF $f_2(y)$ in the cell indicated by (vi). Show work below the table so we know you are not just guessing.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{||c|c|c|c|c|c|c|c||} \hline
+& \multicolumn{7}{c||}{$y$} \\ \hline
+$x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6  \\ \hline
+4 & \hspace*{0.2in} & \hspace*{0.2in} & (i) & \hspace*{0.2in}& (ii) & (iii) & \\ \hline \hline
+5 & & & (iv) & & & &  \\ \hline  \hline
+6 & & & (v) & & & &   \\ \hline \hline
+$f_2(y)$ & & & (vi) & & & & \\ \hline
+\end{tabular}
+\end{table}
+
+
+
+b. Write the conditional distribution of $X$ given $Y=2$. That is $$f(x|y=2) = P(X = x | Y = 2).$$ Again, be sure to state any formulas you are plugging into so we know you are not guessing.
+
+   

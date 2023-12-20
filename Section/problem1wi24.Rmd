@@ -1,0 +1,66 @@
+---
+title: "Problem Section 1"
+date:  "Monday Jan 8 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+   - Construct a table of joint probabilities and calculate marginal and conditional distributions.
+     
+   - Calculate probabilities for the trinomial experiment
+ 
+   - Work with conditional probabilities
+   
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+
+### Exercises 
+
+1. A fair coin is tossed four times. $X$ is the number of heads that come up on the first three tosses and $Y$ is the number of heads that come up on tosses 2, 3, 4. 
+
+   a. Make a table showing the joint PMF of $\langle X, Y \rangle$. 
+   
+   b. Find the marginal distribution of $X$ and also of $Y$.
+   
+   c. Determine the conditional distribution $f(x|y)$ for $y = 2$. 
+
+
+2. Suppose that five independent observations are
+drawn from the continuous PDF
+    $$f(t) = 2t \ \ 0 \leq t < 1$$
+Let $X$ denote the number of $t$'s that fall in the interval $0 \leq t < \frac{1}{3}$ and let $Y$ denote the number of $t$'s in the interval $\frac{1}{3} \leq t < \frac{2}{3}$. 
+
+a. Find the probability that $X=1$ and $Y = 2$. How  will you calculate this in R?
+
+b. Find the probability that $X=1$. How will you calculate this in R?
+
+c. How many observations should you expect will lie in the interval $0 \leq t < \frac{1}{3}$. That is, find $E\left[X \right]$. What is the standard deviation of $X$?
+
+
+3. A plant releases a random number of seeds. Let's call it $X$. Each seed germinates with probability $\pi$ independently of all the other seeds. Let the random variable $Y$ denote the number of seedlings.
+
+   Suppose we observe that the plant released $x$ seeds. Without doing any computations, what is the distribution of $Y$? (This is the conditional PMF of $Y$ given a value for $x$)
+
+
+4. (For HW 1 problem 3) Show, using the binomial theorem, that
+$$\sum\limits_{x=0}^{n} \binom{n}{x} = 2^n.$$
+
+    
