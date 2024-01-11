@@ -1,0 +1,163 @@
+---
+title: "Problem Section 1"
+author: "KEY"
+date:  "Monday Jan 8 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!---
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+   - Construct a table of joint probabilities and calculate marginal and conditional distributions.
+     
+   - Calculate probabilities for the trinomial experiment
+  
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+--->
+
+### Exercises 
+
+1. 
+
+a. 
+     \begin{tabular}{|c|c|c|c|c|}
+   \hline
+    & X=0 & X=1 & X=2 & X=3 \\
+   \hline
+   Y=0 & `r .5^4` & `r .5^3*.5` & 0 & 0 \\
+   Y=1 & `r .5^3*.5` & `r .5^4 + .5^2*.5^2*2` & `r .5*.5^2*2*.5` & 0 \\
+   Y=2 & 0 & `r .5*.5^2*2*.5` & `r .5^4 + .5^2*.5^2*2` & `r .5^4` \\
+   Y=3 & 0 & 0 & `r .5^3*.5` & `r .5^4` \\
+   \hline
+   \end{tabular}
+   
+    \textbf{Explanation:} By the multiplication rule there are $$2 \times 2 \times 2 \times 2 = 2^{4} = 16$$ possible outcomes in this sample space. Each outcome is equally likely and therefore the probabilities of the various $(x,y)$ combinations can be deduced by simply counting the number of outcomes that would result in this value.
+   
+    For example, the outcomes that lead to $x=1, y=2$ are HTTH, THTH, TTHH, which gives a probability of 3/16.
+
+   
+   
+b. We can find the marginal distributions by simply adding the probabilities along the rows or the columns. However, we can also recognize that since $X$ is the number of heads in 3 tosses, it is a binomial random variable. Hence it's probabilities are given by the $Binom(3, \frac{1}{2})$ distribution.
+   
+   \begin{tabular}{|c|c|c|c|c|}
+   \hline
+    & X=0 & X=1 & X=2 & X=3 \\
+    \hline
+   $f_X(x)$ & `r dbinom(0,3,.5)` & `r dbinom(1,3,.5)` & `r dbinom(2,3,.5)` & `r dbinom(3,3,.5)` \\
+   \hline
+   \end{tabular}
+   
+   \begin{tabular}{|c|c|c|c|c|}
+   \hline
+    & Y=0 & Y=1 & Y=2 & Y=3 \\
+    \hline
+   $f_Y(y)$ & `r dbinom(0,3,.5)` & `r dbinom(1,3,.5)` & `r dbinom(2,3,.5)` & `r dbinom(3,3,.5)` \\
+   \hline
+   \end{tabular}
+   
+   
+c. The conditional distribution is given by the formula
+    \begin{align*}
+    f(x|y=2) &= P(X = x|Y = 2), \\
+            &= \frac{ P(X = x \cap Y = 2)}{P(Y = 2)}.
+    \end{align*}
+
+    Thus using the values from our table in part a we have:
+
+    \begin{tabular}{|c|c|c|c|c|} \hline
+    & X=0 & X=1 & X=2 & X=3 \\ \hline
+    $f(x|y=2)$ & 0 & `r (.5*.5^2*2*.5)/.375` & `r (.5^4 + .5^2*.5^2*2)/.375` & `r .5^4/.375` \\ \hline
+    \end{tabular}
+
+2. 
+
+a.  Here $\langle X, Y \rangle$ follow a trinomial distribution since 
+   - there are 5 (fixed number) trials
+   
+   - each trial results in one of three outcomes: whether the realization falls in $[0, \frac{1}{3})$, or $[\frac{1}{3}, \frac{2}{3})$ or $[\frac{2}{3}, 1)$.
+   
+   - the trials are independent 
+
+
+Under these conditions, the joint PMF of $\langle X, Y \rangle$ is
+     
+     
+\begin{align*}
+  f(x,y) &= P(X = x, Y = y), \\
+          &= \frac{5!}{x!y! (5-x-y)!} \pi_1^{x} \pi_2^{y}  (1-\pi_1-\pi_2)^{5-x-y}
+    \end{align*}
+  
+where $x+y \leq 5$ and the probabilities $\pi_1$ and $\pi_2$ are
+    
+\begin{align*}
+    \pi_1 &= \int\limits_{0}^{1/3} f(t) dt = \frac{1}{9},\\
+    \pi_2 &= \int\limits_{1/3}^{2/3} f(t) dt = \frac{3}{9}.
+    \end{align*}
+  
+We will calculate the probability that $X=2, Y=1$ by plugging into the joint PMF:
+
+\begin{align*}
+  f(2,1) &= P(X=2, Y=1), \\
+         & \frac{5!}{2! 1! 2!} \left(\frac{1}{9} \right)^{2} \times \left(\frac{3}{9} \right) \:\times \left(\frac{5}{9} \right)^{2}, \\
+         &= `r (factorial(5)/4)*(1/9)^2*(3/9)*(5/9)^2`
+  \end{align*}
+  
+We can also verify this in R.
+```{r}
+    dmultinom(x=c( 2, 1, 2), prob = c( 1/9, 3/9, 5/9))
+```
+  
+b.  Since this is a statement just about $X$, we will need to use the marginal distribution of $X$ in order to calculate the probability. 
+    
+We know that the marginal distribution of $X$ is a binomial. In other words: $X \sim Binom( 5, \frac{1}{9})$. We want $P(X=1)$.
+    
+```{r}
+    dbinom(x = 1, size = 5, prob =1/9 )
+```
+
+c. Marginally $X \sim Binom( 5, \frac{1}{9})$. Therefore, 
+    \begin{align*}
+    E\left[X \right] &= \frac{5}{9},\\
+    SD\left[X \right] &= \sqrt{ 5 \times \frac{1}{9} \times \frac{8}{9} } = \frac{2 \times \sqrt{10}}{9}.
+    \end{align*}
+
+We should expect `r round(5/9,4)` values to fall in the  interval $0 \leq t < \frac{1}{3}$,  give or take `r round(sqrt(5*8/81),4)`. 
+
+3. The distribution of $Y$ is $Binom( x, \pi)$ since the conditions of a binomial experiment are satisfied.  The $x$ seeds which were released are like trials. Each seed either germinates or not with probability $\pi$ and we are told the trials are independent. 
+    
+Therefore we can write 
+\begin{align*}
+    f(y|x) &= P(Y = y|x) \\
+           &= \binom{x}{y} \pi^{y} (1-\pi)^{x-y}, \ \ \ \ \  y=0,1,2,\dots,x
+\end{align*}
+    
+    
+4. (For HW 1 problem 3) Show, using the binomial theorem, that
+$$\sum\limits_{x=0}^{n} \binom{n}{x} = 2^n.$$ 
+
+The binomial theorem states that for real numbers $a$ and $b$ and an integer $n$:
+\begin{align*}
+    (a+b)^{n} &= \binom{n}{0} a^{0} b^{n} + \binom{n}{1} a^{1} b^{n-1} + \binom{n}{2} a^{2} b^{n-2} + \dots + \binom{n}{n} a^{n} b^{0}, \\
+   &= \sum\limits_{x=0}^{n} \binom{n}{x} a^{x} b^{n-x}.
+\end{align*}
+     
+Choosing $a=1$ and $b=1$ we get the result
+$$(1+1)^n = 2^n = \sum\limits_{x=0}^{n} \binom{n}{x}.$$
