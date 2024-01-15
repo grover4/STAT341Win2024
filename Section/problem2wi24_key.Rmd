@@ -1,0 +1,91 @@
+---
+title: "Problem Section 2"
+author: "KEY"
+date:  "Monday Jan 15 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+
+### Exercises 
+
+1. 
+a.
+
+    No, $X$ and $Y$ are not independent of each other because their joint PDF cannot be factored into a term that just depends on $X$ and another that just depends on $Y$.
+    
+b. 
+
+    Here, we want to integrate the joint PDF over the set of $(x,y)$ where $x < y$. This region is shaded in blue in the graph below.
+
+    ```{r message=F, echo=F, out.width="50%", fig.align="center",warning=F}
+
+df <- tibble(x = c(0,1),
+             y = c(0,1) )
+upper_area <- tibble( x = c(0,0,1), y = c(0,1,1) )
+
+ggplot(data = df) +
+  geom_polygon( mapping = aes(x=x,y= y), 
+                upper_area, 
+                fill = "blue",
+                alpha=0.5)+ 
+   annotate(geom="text", x = 0.5, y = 0.45, label="y=x")
+  
+
+    ```
+   
+    The region can be characterized by allowing $y$ to vary over the interval $[0,1)$ and to limit $x$ to vary from $[0,y)$. 
+   
+  \begin{align*}
+    P(X < Y) &= \int\limits_{0}^{1} \int\limits_{0}^{y} f(x,y) dx dy, \\
+    &= \int\limits_{0}^{1} \int\limits_{0}^{y} (2x +y - 2\:x\:y) dx\:dy \\
+    &= \int\limits_{0}^{1} \left. x^2 + xy - x^2\:y \right\rvert_{0}^{y} dx \\
+    &= \int\limits_0^{1} (2y^2-y^3)\:dy \\
+    &= \left. \frac{2y^3}{3} - \frac{y^4}{4} \right\rvert_0^{1} =    \frac{5}{12}.
+  \end{align*}
+
+
+
+2. If we assume that each brick and mortar's length/thickness is independent of the others we can utilize the independence properties of random variables to find $SD(L)$.
+
+Since there is mortar in between each of the bricks, there will be 49 instances of mortar laid down, and 50 total bricks.
+
+If we denote $B_i$ as the length of the i'th brick, and $M_j$ the thickness of the j'th mortar we have that:
+
+$$L = B_1 + \dots + B_{50} + M_1 + \dots + M_{49}  = \sum_{i=1}^{50} B_i + \sum_{j=1}^{49}M_j$$
+
+Now we may find the variance of L. Here since we know that all the bricks and mortar are independent of eachother, we can find the variance of the sum by taking the sum of the variances. 
+
+$$Var(L) = Var(\sum_{i=1}^{50} B_i + \sum_{j=1}^{49}M_i) = \sum_{i=1}^{50}Var(B_i) + \sum_{j=1}^{49}Var(M_j)$$
+
+Since we know that each $B_i$ has variance $(1/32)^2$ and each $M_i$ has variance $(1/16)^2$ we have:
+
+$$Var(L) = \sum_{i=1}^{50}(1/32)^2 + \sum_{j=1}^{49}(1/16)^2 = 50(1/32)^2 + 49(1/16)^2$$
+
+Thus we have that $SD(L) = \sqrt{50(1/32)^2 + 49(1/16)^2} = `r sqrt(50*(1/32)^2 + 49*(1/16)^2)`$ inches. 
+
+
+3. First we may proceed by finding the variance of W using the properties of independent random variables and variance.
+
+$$Var(W) = Var(cX+(1-c)Y) = c^2Var(X) + (1-c)^2Var(Y)$$
+     
+Thus we have that $Var(W) = c^2 + (1-c)^2$ since both X and Y have variance 1. In other words, we wish to minimize the function $g(c) = c^2 + (1-c)^2$ with respect to $c$. After some simplification we can write this as:
+
+$$g(c) = c^2 + 1 - 2c + c^2 = 2c^2 - 2c + 1$$
+ 
+To minimize this we may begin by taking the first derivative of this function and setting it to zero.
+
+$$g'(c) = 4c - 2 = 0 \Rightarrow c = 1/2$$
+
+To check that c is a minimum, we must show that the second derivative of this function is positive.
+
+We have $g''(c) = 4 >0$ thus we have that $c=1/2$ minimizes the variance of W. Notice that this implies that the average of the two random variables is the best we can do to minimize this variance. 

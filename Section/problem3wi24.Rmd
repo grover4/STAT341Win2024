@@ -1,0 +1,92 @@
+---
+title: "Problem Section 3"
+date:  "Monday Jan 22 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+ 
+   - Finding the distribution of the sum of two independent random variables
+   
+  - Finding the mean and variance of the sum of independent normal random variables.
+  
+   - Performing probability calculations with a normal distribution
+   
+   
+   - Find and work with the distribution of the sample maximum of continuous random variables
+
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+
+### Exercises 
+
+1. Suppose $X$ and $Y$ are independent discrete random variables each with PMF 
+$$f(x) = \frac{1}{3} \ \ \ x = 0, 1, 2.$$
+Find the PMF of the random variable $S = X + Y$.
+
+2. On an average weekday, about 67,000 cars cross the Evergreen Point (Hwy 520) floating bridge over Lake Washington. On weekends (Saturday and Sunday), the average is about 72,000 per day.Assume daily traffic counts are each approximately normal with given means and with standard deviation 1,000 cars/day, independent from day to day. 
+
+a. What is the distribution of the total number of cars crossing the bridge in a week (5 week days, 2 weekend days)?
+
+b. Calculate the probability that more than 482,000 cars cross the bridge in a week.
+
+
+3. Let $q$ denote the 0.6 quantile (or 60th percentile) of a continuous distribution. 
+What is the probability that the larger of two random variables drawn independently from this distribution will exceed $q$?  
+   
+   Hint: Consider the complement
+   
+   
+
+4. Suppose a device has three independent components, all of whose lifetimes (in months) can be modeled by an exponential PDF with rate $\lambda = 1$. That is, if $X_1,X_2,X_3$ denote the lifetime of the three components, then they are independent and each has marginal PDF
+    $$f(x)= e^{-x} \ \ \ x \geq 0$$
+
+a. Find the PDF of $X_{max} = \max\{X_1,X_2,X_3\}$ 
+
+
+b. Let's make a picture of the PDF of $X_{max}$ and superimpose the PDF of $X_1$ on it for comparison. Fill in the blanks in the code below. Don't forget to remove the `eval=FALSE` code chunk option before knitting.
+
+    
+    
+```{r  eval = FALSE}
+
+pdf_max <- function(x){
+  #return the PDF of Xmax at a given value x
+  
+}
+
+ggplot(data = NULL) +
+  #first layer is for X ~ Exp(1)
+  geom_function(fun = ___, 
+                args = list(___ = ___),
+                mapping = aes(color = "Exp(1)" ),
+                xlim=c(0,10) ) +
+  #second layer is for PDF of X_{max}
+  geom_function(fun = pdf_max,
+                mapping = aes(color = "Xmax"),
+                xlim=c(0,10)  ) +
+  labs(x = "x",
+       y = "density",
+       title = "Comparing distributions of X and Xmax",
+       color = "Dist" )    #heading for color legend
+  
+
+```
