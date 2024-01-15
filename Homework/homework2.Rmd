@@ -1,0 +1,98 @@
+---
+title: "Homework 2"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb, diagbox, setspace}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+\onehalfspacing
+
+* * * 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+### Instructions
+
+- This homework is due in Gradescope on Wednesday Jan 24 by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. Any work submitted past this period is considered late.  
+
+- Please answer the following questions in the order in which they are posed. 
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (Joint PMF) The random variables $X$ and $Y$ are independent, each taking the values 1, 2 or 3. Complete the following table of the joint PMF. Show your work for each entry below the table.
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|ccc|} \hline
+\diagbox{$y$}{$x$} & 1 & 2 & 3 \\ \hline
+1 & 0.03 & 0.04 & 0.03 \\
+2 & 0.15 & (b) & (c) \\
+3 & (a) & (d) & (e) \\ \hline
+\end{tabular}
+\end{table}
+
+
+2. (Two friends) Two friends - let's call them Owen and Justin - agree to meet at Tully's for coffee. Suppose that the random variables 
+$$X =  \mbox{the time that Owen arrives at Tully's and}$$
+$$Y = \mbox{the time that Justin arrives at Tully's}$$
+are independent uniform random variables on the interval $[5,6]$. 
+(The units are hours after noon)
+
+
+a. Calculate the probability that both of them arrive before 5:30 PM.
+
+    Hint: You want to find $P(X < 5.5, Y < 5.5)$
+
+b. Calculate the probability that Owen arrives before Justin. Show your steps. (Do the integration, do not just use geometry)
+
+3. (Rounding errors) An individual makes 100 check transactions between receiving his December and his January bank
+statements. Rather than subtracting the amounts exactly, he rounds off each checkbook entry to the
+nearest dollar. Let $X_i$ denote the round off error on the $ith$ check. A reasonable assumption is that 
+$$X_i \sim Unif\left(-\frac{1}{2}, \frac{1}{2} \right)$$
+independently of each other.
+
+    Let $T = X_1+X_2+\dots +X_{100}$. The random variable $T$ denotes the accumulated error after 100 transactions.
+
+a. Find $\mu = E\left[T \right]$. Show your steps. (Please consult the STAT 340 slidedeck "Chapter 12" for results on mean and variance of uniform random variables)
+
+b. Find $\sigma = \sqrt{Var\left[T \right]}$. Show your steps.
+
+c. What can you say about $P(|T| \geq 5)$?  Show your steps and write your answer in a complete sentence \textbf{in context}. 
+
+    Hint: use Chebychev's inequality
+    
+4.  A gambler plays $n$ hands of poker. If she wins the $k^{th}$ hand she collects $k$ dollars, while if she loses it,
+she collects nothing. Assume that her chances of
+winning each hand is constant (equal to $p$).
+
+a. Let the random variable $X_i$ denote her winnings on the $ith$ hand. Write the PMF of $X_i$ by filling in the empty cells in the table below.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}  \hline
+$x$ &  &  \\ \hline
+$f(x)$ &  &  \\ \hline
+\end{tabular}
+\end{table}
+
+b. Find $\mu = E\left[X_i\right]$. 
+
+
+c. Let the random variable $T$ denote the total amount she wins in $n$ hands, that is $T=X_1+X_2+\dots+X_n$.  Find $E\left[T\right]$. State assumptions (if any) you need to make about the $X_i$ in order to do your calculation.
+
+d. Find $Var\left[T\right]$. State assumptions (if any) you need to make about the $X_i$ in order to do your calculation.
+
+    
