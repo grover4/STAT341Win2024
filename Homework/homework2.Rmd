@@ -72,7 +72,7 @@ b. Find $\sigma = \sqrt{Var\left[T \right]}$. Show your steps.
 
 c. What can you say about $P(|T| \geq 5)$?  Show your steps and write your answer in a complete sentence \textbf{in context}. 
 
-    Hint: use Chebychev's inequality
+    Hint: use Chebychev's inequality (Please consult STAT 340 slidedeck 7.2 or the STAT 340 formula sheet!)
     
 4.  A gambler plays $n$ hands of poker. If she wins the $k^{th}$ hand she collects $k$ dollars, while if she loses it,
 she collects nothing. Assume that her chances of
