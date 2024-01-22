@@ -1,0 +1,84 @@
+---
+title: "Homework 3"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb, diagbox, setspace}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+\onehalfspacing
+
+* * * 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+### Instructions
+
+- This homework is due in Gradescope on Wednesday Jan 31 by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. Any work submitted past this period is considered late.  
+
+- Please answer the following questions in the order in which they are posed. 
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (Floods) Suppose that many years of observation have confirmed that the annual maximum
+flood tide $X$ (in feet) for a certain river can be modeled by the PDF
+$$f(x) = \frac{1}{20} \ \ \ \ 20 \leq x < 40$$
+
+a. Let $X_1, X_2, \dots, X_{30}$ denote the (maximum) flood tide height of the river for each of the next 30 years. Give an expression for 
+$$P\left(\max\{X_1, X_2, \dots, X_{30} \} \leq k \right)$$ 
+where $k$ is some number in the range $20 \leq x < 40$. Show your work.
+
+    *Hint* you do not need to derive the PDF of $X_{max}$ to answer this question. 
+
+    
+
+b. The Army Corps of Engineers is planning to build a levee along a certain portion of the river and they want to make it high enough so there is only a 20% chance that the worst flood in the next thirty years will overflow the embankment. How high should the levee be? (Please use only R to do your calculations and report your answer - rounded to 4 digits - in a complete sentence using inline code.)
+
+    *Hint*: you want to find $k$ so that $P\left(\max\{X_1, X_2, \dots, X_{30} \} > k \right) = 0.2$
+   
+   
+2. (Sum of Poissons) Suppose $X_1, X_2, \dots, X_k$ are $k \:(\geq 2)$ independent Poisson random variables with rate parameters $\lambda_1, \lambda_2, \dots, \lambda_k$ respectively. 
+That is, the PMF of each $X_i$ is
+$$f_i(x) = e^{-\lambda_i} \frac{\lambda_i^{x}}{x!}, \ \ \ x=0,1,2,\dots$$
+Show, using mathematical induction that
+$$S = X_1 + X_2 + \dots + X_{k} \sim Pois(\sum\limits_{i=1}^{k} \lambda_i).$$
+
+    *Hint*: Look at Example 16.1 and Theorem 16.2 for the proof for the Binomial distribution. 
+   
+3. (Three normals) The	random	variables	$X_1$,	$X_2$ and	$X_3$ are	independent	$Norm(\mu, 1)$.	Let $\bar{X}$ be	the	
+(arithmetic)	average	of	the	three	random	variables.	That is:
+$$\bar{X} = \frac{1}{3} \left(X_1 + X_2 + X_3 \right).$$
+
+   What is the probability	that the random variable $Y = (X_1	- \bar{X}) >	1.6$?
+
+   Be sure to first write the distribution of $Y$ clearly, cite any results you use, show your steps and code in a code chunk.
+   
+    *Hint* Write $Y$ as a linear combination of the three $X$'s. 
+   
+4. (Call center) Let the Poisson random variable $X$ be
+the number of calls for technical assistance received by a
+computer company during the firm’s nine normal workday hours. Suppose the average number of calls \underline{per hour}
+is 7.0 and that each call costs the company \$50. Let $Y$ be a
+Poisson random variable representing the number of calls
+for technical assistance received during a day’s remaining fifteen hours. Suppose the average number of calls \underline{per
+hour} is 4.0 for that time period and that each such call costs
+the company \$60. 
+
+
+a. Let the random variable $C$ denote the cost associated with the calls received during a 24 hour day. Write $C$ as a function of $X$ and $Y$. 
+
+    
+b. Find the expected cost and the variance of the random variable $C$. Be sure to state any assumptions you make in order to do your calculation. And show your work.
+   
+     
