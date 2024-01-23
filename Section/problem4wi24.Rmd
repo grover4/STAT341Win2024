@@ -1,0 +1,93 @@
+---
+title: "Problem Section 4"
+date:  "Monday Jan 29 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+ 
+   - Derive and calculate the method of moments estimator as well as its estimated standard error
+
+   - Be able to verify unbiasedness and consistency of an estimator
+   
+   - Be able to "unbias" a biased estimator which is off by a multiplicative constant
+   
+   - Compare unbiased estimators using their variance
+   
+   - Compare biased estimators using the mean squared error
+   
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+
+### Exercises 
+
+1. Suppose $X_1, X_2, \dots, X_n$ are independent random variables with PMF
+\begin{eqnarray*}
+f(x) &=& \left\{ \begin{array}{cc}
+             \frac{1}{3} - \theta_0 & x = 0  \\
+             \frac{1}{3} & x =1 \\
+             \frac{1}{3} + \theta_0 & x =2 \end{array} \right.
+\end{eqnarray*}
+where you can assume $-\frac{1}{3} \leq \theta_0 \leq \frac{1}{3}$ so all probabilities are non-zero. 
+
+a. Give an expression for $\hat{\theta}_0^{mom}$, the method of moments estimator of $\theta_0$. 
+
+b. Is your estimator from part a. an unbiased estimator for $\theta_0$?
+
+c. Find the variance of your estimator from part a. Is it a consistent estimator for $\theta_0$? 
+
+d. Based on the sample 0, 0, 1, 0, 1, 2, 1, 0, 0, calculate the value of $\hat{\theta}_0^{mom}$ for this sample. Also calculate the estimated standard error.
+
+
+2. If $\hat{\theta}_1$ and $\hat{\theta}_2$ are two unbiased estimators of a parameter $\theta$ and $Var\left[\hat{\theta}_1 \right] < Var\left[\hat{\theta}_2\right]$, then $\hat{\theta}_1$ is said to be *more efficient* than $\hat{\theta}_2$.
+
+Suppose $X_1,X_2,X_3$ are independently and identically sampled from a distribution with true mean $\mu$ and variance $\sigma^2$. Consider the following two estimators for $\mu$:
+\begin{align*}
+\hat{\mu}_1 &= \frac{1}{4} X_1 + \frac{1}{2} X_2 + \frac{1}{4} X_3\\
+\hat{\mu}_2 &= \frac{1}{3} X_1 + \frac{1}{3} X_2 + \frac{1}{3} X_3
+\end{align*}
+
+a. Show that both estimators are unbiased.
+
+b. Which is the more efficient estimator? 
+
+
+3. When sampling $X_1,X_2,\dots,X_n$ independently from a $Unif(0, \theta_0)$ distribution, we saw that the $X_{max} = \max\{X_1,X_2,\dots,X_n\}$ was a biased estimator of $\theta_0$ because
+$$E\left[X_{max} \right] = \frac{n}{n+1} \theta_0.$$ 
+
+a. Create an unbiased estimator of $\theta_0$ based on $X_{max}$. Call this estimator $\hat{\theta}_0$.
+    
+    Hint: an estimator can be based on random variables and numbers like $n$. The only thing off limits are unknown parameters
+    
+
+b. Derive the variance of $\hat{\theta}_0$. Is its variance larger or smaller than the $Var\left[ X_{max} \right]$? 
+
+    Hint: Recall it was mentioned in class that $Var(X_{max}) = \frac{n\theta_0^2}{(n+2)(n+1)^2}$. You may use this fact without proof.
+
+c. A common way to compare estimators that are not both unbiased is via the Mean Square Error (MSE) which accounts for both the bias and variance of an estimator. 
+$$MSE(\hat{\theta}_0) = (bias)^2 + Var\left[\hat{\theta}_0 \right]$$
+where the bias term is defined as
+$$bias = E\left[\hat{\theta}_0 \right] - \theta_0.$$
+An estimator with a smaller MSE is preferred.
+Find $MSE(X_{max})$, the MSE of $X_{max}$ and also $MSE(\hat{\theta}_0)$.
+
+d. Which estimator has the smaller MSE? Compare  $MSE(X_{max})$ with $MSE(\hat{\theta}_0)$.
+
