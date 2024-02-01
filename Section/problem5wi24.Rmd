@@ -61,23 +61,3 @@ of 0.4 mm and that this is unchanged with the new process.
 $$P(|X - \mu| \geq k \sigma) \leq \frac{1}{k^2}$$
   Apply Chebychev's inequality to the random variable $\bar{X}$. You may also want to look at theorem 18.1 on page 8 of the slidedeck titled Chapter 18.
 
-
-4.  Suppose $X_1, X_2, \dots, X_n \overset{i.i.d.}{\sim} Unif(0, \theta_0)$. That is, each $X_i$ is drawn independently from the PDF
-$$f(x) = \frac{1}{\theta_0} \ \ \ \ \ 0 \leq x < \theta_0$$
-for some (unknown) value of $\theta_0$.
-Define
-$$X_{max} = max \left\{X_1,X_2, \dots, X_n \right\}.$$
-In this problem we will construct an exact 95\% confidence interval for $\theta_0$
-using $X_{max}$ and its sampling distribution 
-$$f_{X_{max}}(x) = \frac{n\:x^{n-1}}{\theta_0^n} \ \ 0 \leq x < \theta_0.$$ 
-
-a. Show that $Y = \frac{X_{max}}{\theta_0}$ is a pivot. In other words, show that $Y$ has a PDF which is free of $\theta_0$.
-
-    Hint: Start with the CDF of $Y$ and then differentiate it to find the PDF.
-    
-b. Determine any pair of values $a$ and $b$ so that $P(a \leq Y \leq b) = 0.95$. (Please don't make the same choice as your group members)
-
-c. Now use your result from a. and b. to find a 95% confidence interval for $\theta_0$. 
-
-d. Suppose our sample values are $x_1 = 0.2, x_2 = 0.9, x_3 = 1.9, x_4 = 2.2, x_5 = 4.7, x_6 = 5.1$. Calculate your interval for $\theta_0$ from part d. for this sample. Compare your interval with a neighbor. Who has the shorter interval?
-
