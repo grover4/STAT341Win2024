@@ -1,0 +1,116 @@
+---
+title: "Homework 4"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb, diagbox, setspace}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+\onehalfspacing
+
+* * * 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+### Instructions
+
+- This homework is due in Gradescope on Wednesday Feb 7 by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. Any work submitted past this period is considered late.  
+
+- Please answer the following questions in the order in which they are posed. 
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (Fit a model) Suppose $X_1,X_2,\dots,X_n$ are sampled independently from the PDF
+$$f(x) = (1+\theta_0)\:x^{\theta_0} \ \ \ 0 \leq x < 1$$
+where $\theta_0$ is the true (but unknown) value of a parameter.
+
+a. Find $\hat{\theta}_0^{mom}$,  the method of moments estimator of $\theta_0$. Show your work.
+
+b. The 100 values in the `sample_df` dataframe below are a random sample from this PDF with the true value of the parameter $\theta_0 = 3$. Calculate the method of moments estimate for these data in the code chunk below. I have written starter code to create a histogram (on a density scale) of the data with the true PDF superimposed on it. Fill in any blanks and also add code to superimpose the "fitted" PDF on it. **Don't forget descriptive labels for the axis (not x and y!), titles and also legend. **  Also delete the `eval = FALSE` after you have filled in the blanks.
+
+```{r problem1, eval =F}
+
+set.seed(1131)         # for reproducibility
+theta0 <- 3            # specify true value of parameter of PDF
+
+#I have generated 100 x's from the PDF f(x) using 
+#the inverse CDF method and stored the x's as a 
+#variable in a data frame
+
+sample_df <- tibble(
+  x = runif(n = 100, min = 0, max = 1)^(1/(theta0+1) ) 
+       )
+
+# You write code to calculate and print the method of moments estimate of theta0
+
+
+# I have created the histogram of x on density scale, 
+# with the PDF using true value of theta0. 
+# You add the layer to plot the fitted PDF and 
+# also add labels, titles
+
+
+ggplot( data = ___ ) +
+  geom_histogram(mapping=aes(x = ___,
+                             y = ___ ),
+                 breaks=seq(0,1,0.1)) +
+  geom_function(fun=function(x){ (theta0+1)*x^(theta0)},
+                mapping=aes(color="True PDF")) +
+  geom_function( ___ ) +
+  labs( ___ )
+
+```
+
+
+2. (Unbiasing) Let $X \sim Binom(n, \pi_0)$.
+
+a.  Show, with justification, that
+$$E\left[ \frac{X}{n} \left(1 - \frac{X}{n} \right) \right] = \frac{(n-1)\:\pi_0\:(1-\pi_0)}{n}$$ 
+
+b. Suppose we want an unbiased estimator for $\pi_0 \:(1-\pi_0).$ Use your answer from (a) to construct such an estimator.
+
+3. (Bayes estimator) Let $X_1, X_2,\dots, X_n$ be independent Bernoulli random variables drawn from the PMF:
+$$f(x) = \pi_0^{x} \:(1-\pi_0)^{1-x}, \ \ \ x = 0,1$$
+
+   Consider the Bayesian estimator of $\pi_0$^[don't worry about how to derive this estimator]: 
+$$\hat{\pi}_0^{bayes} = \frac{X+1}{n+2}$$ 
+where $X = X_1 + X_2 + \dots + X_n$ is $Binom(n, \pi_0)$.
+
+a. Is $\hat{\pi}_0^{bayes}$ an unbiased estimator of $\pi_0$? If not, is it asymptotically unbiased?  Be sure to clearly define the property of unbiasedness before investigating whether it holds or not.
+
+
+b. Is $\hat{\pi}_0^{bayes}$ a consistent estimator? Be sure to explain what consistency means before investigating whether it holds or not.
+
+
+4. (Bias variance trade-off) In this problem we will continue working with the model described in problem 3. Our focus will be on comparing the mean square error (MSE) of $\hat{\pi}_0^{bayes}$ with the MSE of 
+$$\hat{\pi}_0^{mom} = \frac{X}{n}.$$ 
+
+a. Give expressions for the MSE of each estimator. Show your work clearly. State the definition of MSE first before calculating it.
+
+
+b. For $n = 10$, plot the MSE of both estimators on the same graph as a function of $\pi_0$. Describe (just visually) the $\pi_0$ values for which the MSE is smaller for the Bayes estimator. Don't forget to show your code, label the plot. 
+
+```{r problem 4b}
+
+
+```
+
+c. Repeat part b with $n=1,000$.
+
+```{r problem 4c}
+
+
+```
+
+d. Write a couple of sentences explaining what you have learned from parts b and c.
