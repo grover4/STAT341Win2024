@@ -1,0 +1,83 @@
+---
+title: "Problem Section 5"
+date:  "Monday Feb 5 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+   - Calculate probabilities using the Central Limit Theorem.
+   
+   - Construct a confidence interval using Chebychev's inequality
+   
+   - Construct a confidence interval by inverting a probability statement
+   
+   - Calculate the sample size for a desired margin of error
+   
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+
+### Exercises 
+
+1. In a grocery store, 400 customers shop everyday. The number of half-gallons of nonfat milk bought by a randomly selected customer is a random variable $X$ having PMF
+\begin{align*}
+f(x) &= \left\{ \begin{array}{cc}
+                0.3 & x=0\\
+                0.5 & x=1 \\
+                0.2 & x=2 \end{array} \right.
+\end{align*}
+
+   Assume buying behaviors of different customers are independent. The grocer requests 390 half gallon containers per day from the distributor. Calculate, using the Central Limit Theorem,  the probability that, on a given day that is enough.  (Please practice defining random variables and setting up the problem mathematically first)
+   
+
+2. A manufacturer of toothpicks wonders what the mean width of a toothpick is under a new manufacturing
+method. How many toothpicks must the manufacturer measure to be at least 90% confident that the sample 
+mean is no farther from this unknown mean than 0.10 mm? Assume the conditions of the Central Limit
+Theorem are satisfied, and note that toothpicks produced under the old method had a standard deviation
+of 0.4 mm and that this is unchanged with the new process.
+
+   
+
+3. Suppose $X_1, X_2, \dots, X_n$ are independent observations from a probability distribution with mean $\mu_0$ and variance $\sigma^2_0$.  Use Chebychev's inequality to come up with a confidence interval for $\mu_0$ which has at least 95% confidence.  
+
+   Hint: For any random variable $X$ with mean $\mu$ and variance $\sigma^2$, Chebychev's inequality states that 
+$$P(|X - \mu| \geq k \sigma) \leq \frac{1}{k^2}$$
+  Apply Chebychev's inequality to the random variable $\bar{X}$. You may also want to look at theorem 18.1 on page 8 of the slidedeck titled Chapter 18.
+
+
+4.  Suppose $X_1, X_2, \dots, X_n \overset{i.i.d.}{\sim} Unif(0, \theta_0)$. That is, each $X_i$ is drawn independently from the PDF
+$$f(x) = \frac{1}{\theta_0} \ \ \ \ \ 0 \leq x < \theta_0$$
+for some (unknown) value of $\theta_0$.
+Define
+$$X_{max} = max \left\{X_1,X_2, \dots, X_n \right\}.$$
+In this problem we will construct an exact 95\% confidence interval for $\theta_0$
+using $X_{max}$ and its sampling distribution 
+$$f_{X_{max}}(x) = \frac{n\:x^{n-1}}{\theta_0^n} \ \ 0 \leq x < \theta_0.$$ 
+
+a. Show that $Y = \frac{X_{max}}{\theta_0}$ is a pivot. In other words, show that $Y$ has a PDF which is free of $\theta_0$.
+
+    Hint: Start with the CDF of $Y$ and then differentiate it to find the PDF.
+    
+b. Determine any pair of values $a$ and $b$ so that $P(a \leq Y \leq b) = 0.95$. (Please don't make the same choice as your group members)
+
+c. Now use your result from a. and b. to find a 95% confidence interval for $\theta_0$. 
+
+d. Suppose our sample values are $x_1 = 0.2, x_2 = 0.9, x_3 = 1.9, x_4 = 2.2, x_5 = 4.7, x_6 = 5.1$. Calculate your interval for $\theta_0$ from part d. for this sample. Compare your interval with a neighbor. Who has the shorter interval?
+
