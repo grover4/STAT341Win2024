@@ -1,0 +1,130 @@
+---
+title: "Homework 5"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb, diagbox, setspace}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+\onehalfspacing
+
+* * * 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(fastR2)
+```
+
+### Instructions
+
+- This homework is due in Gradescope on Wednesday Feb 14 by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. Any work submitted past this period is considered late.  
+
+- Please answer the following questions in the order in which they are posed. 
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (Errors in estimation) Bias and variance are errors that arise in any measuring system. Bias is any systematic tendency for measurements to deviate from the true value, while variability describes a haphazard tendency for measurements to be off from the true value.  For each of the following errors, state whether it (predominantly) involves bias or variability and explain your reasoning briefly.
+
+a. Before taking off, a pilot is supposed to set the aircraft altimeter to the elevation of the airport. A pilot leaves Denver (altitude 5,280 feet) with her altimeter set to 2,500 feet, so the subsequent altitude measurements are off from the true altitude of the plane.
+
+b. An iPhone battery is supposed to provide 3.7 volts. An aftermarket supplier manufactures 5,000 replacement batteries and finds that the actual voltage provided has a mean of 3.7 V, but about half the batteries provide less than 3.7 volts and half more than 3.7 volts. 
+
+c. For data collected on car driving fatalities, a researcher claims that while many fatalities are recorded as involving alcohol, many others are missed because the deceased are not tested for alcohol consumption. 
+
+d.  Scientists studying global warming have difficulty interpreting historical temperature data because most temperature measurements were recorded in urban areas, which tend to be warmer than rural areas because of heat released by human activity.
+
+
+
+2. (Central Limit Theorem) Suppose that the time (in days) until a component fails has an exponential distribution with rate $\lambda=\frac{1}{45}$. When a component fails, it is immediately replaced by a new component. Use the Central Limit Theorem to estimate the probability that 40 components will together be sufficient to last for at least 5 years. (You may assume a year has exactly 365.25 days)
+
+   **You may use R to perform the calculations but be sure to set up the problem mathematically first - define random variables, clearly state distributions, show what probability you are calculating. **
+
+   
+3. (Basketball) The `MIAA05` basketball data from the **fastR2*8 package contains statistics on 134 players in the MIAA 2005 Men's Basketball season. The following code chooses 100 random samples of size $n=15$ from the dataset. From each sample, the mean and standard deviation of `PTSG` is calculated.
+
+```{r include = FALSE}
+
+set.seed(853)                           # set random number seed
+nsamp<-100                              #number of distinct samples
+sampsize<-15                            #size of each sample 
+
+#Use lapply to repeatedly draw a sample from MIAA05
+#From each sample, calculate the mean and the standard deviation of PTSG
+#return a list where each element is a dataframe with the sample mean
+#and sample sd for each sample
+#take a look at x once you create it to see what it looks like
+
+x <- lapply(X=1:nsamp , FUN=function(X){
+            new_sample <- sample(MIAA05$PTSG, size = sampsize, replace=F)
+            xbar <- mean(new_sample)
+            s2 <- sd(new_sample)
+            data.frame(sample_mean = xbar, sample_sd = s2) })
+
+## bind the rows of the individual data frames contained in the list ## to create one dataframe. 
+
+sample_summary <- do.call(rbind,x)
+
+```
+
+a. From each sample, calculate a 90% large sample confidence interval for the mean PTSG (points per game) of MIAA players. Add the lower and upper limits of the confidence interval as additional columns called `lower` and `upper` in the `sample_summary` dataframe. Then print the first 10 rows of the dataframe.  (Show your code and output)
+
+```{r problem_3a}
+
+
+```
+
+b. The following code represents the confidence intervals you calculated in part a .as horizontal line segments. Fill in the `labs` layer. Also add a vertical line corresponding to the true mean `PTSG` in red. (You will need to calculate this from the `MIAA05` data.)
+
+```{r eval = F}
+#remove eval=F chunk option once you have filled in the blanks
+
+ggplot(data=sample_summary)+
+  geom_segment(mapping = aes(x = lower, 
+                             xend = upper,
+                             y = 1:nsamp,
+                             yend = 1:nsamp)) +
+  labs(x = " ",
+       y = " ",
+       title = " ") +
+  theme(axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+```
+
+c. Of the confidence intervals you calculated in part a, how many contain the true mean `PTSG`? Write code to calculate this and show your code. Please write your answer in a complete sentence using inline code.
+
+```{r problem_3c}
+
+
+```
+
+d. Suppose you bump up the sample size from 15 to 25. Would you *expect* more intervals to cover the true mean `PTSG`? Why or why not?
+ 
+     *Hint*: does the value of $n$ affect the confidence level or the length of the confidence interval? 
+    
+    
+    
+4. Suppose a single observation $X$ is drawn from a $Unif(0, \theta_0)$. That is, $X$ has PDF
+$$f(x ) = \frac{1}{\theta_0} \ \ \ \ 0\leq x < \theta_0.$$
+
+a. Show that $Y = \frac{X}{\theta_0}$ is a **pivot**. This means show that its PDF does not depend on $\theta_0$.
+
+    Hint: Find the CDF method of $Y$ and differentiate it to to find the PDF of $Y$. For an example of the technique, look at pages 22 and 25 fromslidedeck 13 from STAT 340
+    
+b. Determine any pair of values $a$ and $b$ so that $P(a \leq Y \leq b) = 0.9$. The numbers $a$ and $b$ can take any values that work.   
+
+c. Now use your result from part b. to find a 95% confidence interval for $\theta_0$. 
+
+   Hint: Plug in $Y=\frac{X}{\theta_0}$ in the probability statement in b. and move $\theta_0$ to the middle.
+   
+d. Suppose we observe $x = 2.1$. Calculate and interpret your 90% confidence interval estimate for $\theta_0$.
+    
