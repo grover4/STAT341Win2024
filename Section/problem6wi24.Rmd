@@ -1,0 +1,79 @@
+---
+title: "Problem Section 6"
+date:  "Monday Feb 12 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+   - Implement a non-parametric bootstrap scheme
+   
+   - Calculate bootstrap confidence intervals
+   
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+
+### Exercises 
+
+1. (Non-parametric bootstrap) Consider the following set of 20 numbers which were independently drawn from some distribution with mean $\mu_0$ and variance $\sigma^2_0$. 
+
+```{r}
+
+obs_df <- tibble(
+  x = c(3.56, 0.69, 0.10, 1.84, 3.93, 
+        1.25, 0.18, 1.13, 0.27, 1.21, 
+        0.50, 0.67, 0.01, 0.61, 0.82, 
+        1.70, 0.39, 0.11, 1.20, 0.72)
+)
+
+```
+
+
+In this problem we are interested in estimating $\sigma^2_0$ using the method of moments estimator
+$$\hat{\sigma}^{2}_0 = \frac{1}{n} \sum\limits_{i=1}^{n} (x_i - \bar{x})^2$$
+
+a. Calculate the observed value of the estimator $\hat{\sigma}^2_0$ for this sample and save it in a variable called `obs_sigma2hat`. Report its value using inline code rounded to four digits.
+
+
+```{r}
+
+#calculate obs_sigma2hat for the observed sample
+
+```
+
+
+
+Now we wish to construct the bootstrapped sampling distribution of $\hat{\sigma}^2_0$  using non-parametric bootstrap to resample from the original data. 
+
+
+b. Construct the bootstrapped sampling distribution of $\hat{\sigma}_0^2$. Follow these steps. (You can look at pages 25, 30 and 31 of the slidedeck labeled "19.1-19.2")
+
+   - Take B random samples of size 20 each from the observed sample data with replacement and calculate the value of the bootstrapped estimate - call it sigma2star -  for each resample. Save the estimates in a data frame called `boot_df`.
+   - Make a histogram of the bootstrapped estimates. Examine the shape. Calculate the mean and standard deviation of the bootstrapped estimates
+   - If the bootstrap results indicate evidence of bias in the estimator, adjust your point estimate from part a accordingly to calculate a bias-corrected version
+   - Calculate a 90% bootstrap confidence interval. You need to decide whether to use the standard method or the percentile based method.
+   - Report your point estimate and confidence interval in a complete sentence using inline code. 
+   
+```{r bootstrapping}
+set.seed(1415151)
+B = 1000
+
+```
