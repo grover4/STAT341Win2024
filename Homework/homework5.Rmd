@@ -122,7 +122,7 @@ a. Show that $Y = \frac{X}{\theta_0}$ is a **pivot**. This means show that its P
     
 b. Determine any pair of values $a$ and $b$ so that $P(a \leq Y \leq b) = 0.9$. The numbers $a$ and $b$ can take any values that work.   
 
-c. Now use your result from part b. to find a 95% confidence interval for $\theta_0$. 
+c. Now use your result from part b. to find a 90% confidence interval for $\theta_0$. 
 
    Hint: Plug in $Y=\frac{X}{\theta_0}$ in the probability statement in b. and move $\theta_0$ to the middle.
    
