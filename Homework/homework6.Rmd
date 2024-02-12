@@ -1,0 +1,124 @@
+---
+title: "Homework 6"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb, diagbox, setspace}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+\onehalfspacing
+
+* * * 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+```
+
+### Instructions
+
+- This homework is due in Gradescope on Wednesday Feb 21 by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. Any work submitted past this period is considered late.  
+
+- Please answer the following questions in the order in which they are posed. 
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (Difference of two means) Using a random sample of 25 observations - $X_1,X_2,\dots,X_{25}$ -  from a  population with (unknown) mean $\mu_1$ and (known) standard deviation $\sigma_1$, a 95\% large sample confidence interval for $\mu_1$ was $[1.37, 1.53]$. 
+
+   Similarly using an independent sample of 36 observations - $Y_1, Y_2, \dots, Y_{36}$ - from a population with (unknown) mean $\mu_2$ and (known) standard deviation $\sigma_2$, a 95\% large sample confidence interval for $\mu_2$ was $[1.17, 1.29]$.
+
+a. Find the values for $\bar{x}$, $\bar{y}$, $\sigma_1$ and $\sigma_2$. You can use R as a calculator, just show the code in the code chunk and print answers. 
+
+b. The large sample confidence interval for a population mean is based on the Central Limit Theorem which states that sample means are approximately normally distributed for large means. Specifically, 
+$$\bar{X} \approx Norm(\mu_1, \frac{\sigma_1}{\sqrt{25}}) \ \ \  \ \ \ \bar{Y} \approx Norm(\mu_2, \frac{\sigma_2}{\sqrt{36}}).$$
+This implies that $\bar{X} - \bar{Y}$ is also approximately normally distributed for large sample sizes^[linear combination of normal random variables is also normal]. What is the mean and standard deviation of this distribution? 
+
+
+
+c. Use the large sample normal distribution of $\bar{X} - \bar{Y}$ to construct a 95% confidence interval for $\mu_1- \mu_2$. Calculate it for this example.
+
+
+2. (Binomial proportion) A sample of 83 independent realizations of an integer-valued random variable $X$ is shown below:
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccccc} \\ \hline
+value & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+frequency & 13 & 18 & 23 & 15 & 6 & 8 \\ \hline
+\end{tabular}
+\end{table}
+
+Find and interpret a 90% large sample confidence interval for $\pi_0 = P(X \geq 2)$. You can simply refer to slides 5  and 7 in the slide deck labeled 19.1-19.2 for the formula. State the formula and then do the calculations in a code chunk using R as a calculator. Finally, report the interval in a sentence using inline code.
+ 
+3. (Margin of error) Assume that the binomial parameter $\pi_0$ is to be
+estimated with the sample proportion $\hat{\pi}_0 = \frac{X}{n}$, where $X$ is the number of successes in $n$ independent trials. Which demands the larger sample size: requiring 96% confidence that $\hat{\pi}_0$ is no further from $\pi_0$ than 0.05,  or requiring 92% confidence that $\hat{\pi}_0$ is no further from $\pi_0$ than 0.04?  
+
+    Hint: refer to example 18.5 in the slidedeck titled 19.1-19.2. You can plug in $\pi_0=\frac{1}{2}$ when calculating the standard deviation of $\hat{\pi}_0$ since we have no data when doing these types of calculations. 
+    
+    
+4. (Bootstrapping) In this problem you will create a 95% bootstrap  confidence interval for the **median** (daily) rental price of homes in Seattle with 3 or more bedrooms based on a sample of $n=25$ listings. 
+
+a. Create a smaller data frame called `airbnb_3bed` which contains only the prices for all homes with 3 bedrooms. The variables you will be filtering on are given below. Be sure to provide a glimpse of the filtered dataframe. (Look at slides 43-49 in the slidedeck titled 18.1-18.3 for parts a, b, c)
+
+    - property_type: Houses
+    - room_type: Entire home/apt
+    - bedrooms: 3 or more
+  
+```{r problem 4a, message = F, warning = F}
+#create airbnb_3bed
+
+
+```
+
+
+b. Using `airbnb_3bed`, create a histogram of `price`. Comment on the shape, and calculate the median of the price and report it in a complete sentence using inline code. (This is the true value of your parameter. )
+
+```{r problem 4b, message = F, warning = F}
+#make histogram of price 
+#Use Sturges rule: number of bins = log2(n) to come up with
+#a reasonable binwidth for geom_histogram
+
+
+
+```
+
+
+c. Draw a random sample of $n=50$ rows from `airbnb_3bed` and save the resulting sample in `airbnb_3bed_sample`. Calculate the median price in your sample, save it to a variable called `obs_median` and report it using inline code. (This is your point estimate for the parameter, for now)
+
+```{r problem 4c}
+set.seed(1512974)    
+
+
+```
+
+d. In this part, you will use your sample dataframe `airbnb_3bed_sample` to construct a 95% (non-parametric) bootstrap confidence interval estimate for the parameter. Follow these steps.
+
+   - Take B random samples of size 50 each from `airbnb_3bed_sample`  with replacement and calculate the value of the bootstrapped estimate  - call it medianstar -  for each resample. Save the estimates in a data frame called `boot_df`.
+   - Make a histogram of the bootstrapped estimates. Examine the shape. Calculate the mean and standard deviation of the bootstrapped estimates
+   - If the bootstrap results indicate evidence of bias in the estimator, adjust your point estimate from part b accordingly to calculate a bias-corrected version
+   - Calculate a 95% bootstrap confidence interval. You need to decide whether to use the standard method or the percentile based method.
+   - Report your findings about the median daily price of 3 bedroom rentals in Seattle in a complete sentence using inline code.
+
+
+
+   
+```{r boot}
+#generate sample of n = 50 from airbnb_3bed_sample 
+#with replacement and then calculate median.
+#Repeat B times
+
+set.seed(14141)
+B = 1000
+
+
+
+```
+  
