@@ -1,0 +1,83 @@
+---
+title: "Problem Section 7"
+date:  "Monday Feb 19 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+\begin{shaded}
+
+\textbf{Learning Outcomes}
+
+The problems are designed to build conceptual understanding and problem-solving skills. The emphasis is on learning to find, evaluate and build confidence. The specific tasks include: 
+
+   - Calculate one and two-sided P-values 
+   
+   - Find the Type I and Type II errors for a given decision rule
+   
+   - Back up and support work with relevant explanations
+
+
+\end{shaded}
+
+
+* * *
+
+### Exercises 
+
+1. A children's game uses a six sided die with a picture of a ghost named Hugo on one side and numbers on the other sides. If the die is fair, the ghost should be rolled 1/6 of the time. You test the die by rolling it $n=10$ times and and the ghost is rolled $x=3$ times.  Calculate the P-value for an exact binomial test of the hypothesis
+$$H_0: \pi = \frac{1}{6} \ \ \ H_1: \pi \neq \frac{1}{6}$$
+
+2. As input for a new inflation model, economists
+predicted that the average cost of a hypothetical "food
+basket" in western WA in July would be \$145.75. The
+standard deviation ($\sigma_0$) of basket prices was assumed to be
+$9.50, a figure that has held fairly constant over the years.
+To check their prediction, a sample of twenty-five baskets
+representing different parts of the region were checked in
+late July, and the average cost was \$149.75. 
+
+a. Let $\mu_0$ denote the true mean price of the food basket in July in Western WA. Write the null and alternative hypothesis.
+
+b. Suppose the test will be based on $\bar{X}$ the sample mean. What is its null sampling distribution?  (You may assume the CLT applies)
+
+c. Calculate the P-value associated with $\bar{x} = \$149.75$. 
+
+3. An experimenter takes a sample of size 4 - $X_1, X_2, X_3,X_4$ - from
+the Poisson probability model, 
+$$f(x) = e^{-\lambda_0} \frac{\lambda_0^{x}}{x!} \ \ \ x=0,1,2, \dots$$
+ and wishes to test
+$H0: \lambda_0 = 6$ versus $H_1: \lambda_0 < 6$. The test will be based on the statistic $S = X_1+X_2+X_3+X_4$. 
+
+   a. Find the P-value associated with observing $s_{obs} = 15$. 
+   
+   b. Suppose we decide to conduct the test at level $\alpha = 0.1$. What values of $s_{obs}$ will you reject $H_0$ for?
+
+   a. Find the Type I error rate for your test in part b.
+   
+   d. Calculate the Type II error rate for your test in part b. when $\lambda_0 = 4$. 
+   
+   
+4. An urn contains ten marbles: an unknown number of them are white, the rest red. We wish to test:
+$$H_0: \mbox{exactly half are white}$$
+versus 
+$$H_1: \mbox{more than half are white}$$
+We will draw randomly, without replacement, three marbles and reject $H_0$ if two or more are white.
+
+   a. Find the Type I error rate of this test. 
+   
+    **Hint:** we reject if $X$, the number of white marbles drawn is $\geq 2$. You will need to write the PMF of $X$ under $H_0$ to calculate the P-value. To find it, remember this is a problem where you are sampling from a finite population where the items can be one of two types. Think back to the goldfish (tagged, untagged) problem from STAT 340.
+   
+   b. Find the Type II error rate in two situations.
+   
+      - 60\% of the marbles in the urn are white
+      
+      - 70\% of the marbles in the urn are white.
