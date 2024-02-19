@@ -1,0 +1,84 @@
+---
+title: "Homework 7"
+subtitle: "Winter 2024"
+author: "WRITE YOUR NAME HERE"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb, diagbox, setspace}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+\onehalfspacing
+
+* * * 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+```
+
+### Instructions
+
+- This homework is due in Gradescope on \textbf{Friday, March 1} by midnight PST. There is a 15 minute grace period and submissions made during this time will not be marked as late. \textbf{No late work work will be accepted past this window} 
+
+- Please answer the following questions in the order in which they are posed. 
+
+- \textbf{You may handwrite your answers to this homework if you find it necessary. Be careful to write neatly and in dark ink, so the scan is legible. Please scan ALL your pages in portrait mode, no landscape.  Also please show relevant R code by writing it out. }
+
+- Don't forget to (i) make a local copy this document for your work and to (ii) knit the document frequently to make sure there are no compilation errors. 
+
+- When you are done, download the PDF file as instructed in section and submit it in Gradescope. 
+
+* * *
+
+
+### Exercises 
+
+1. (NHL) After a 2010 NHL playoff win in which Detroit Red-Wings wingman Henrik Zetterberg scored two goals in a 3-0 win over the Phoneix Coyotes, Detroit coach Mike Babcock said "He's been really good at playoff time each and every year. He seems to score at a *higher rate* in the playoffs compared to the regular season."
+
+   In 506 regular season games, Zetterberg scored 206 goals (goal scoring rate of $\frac{206}{506} = 0.407$). In 89 \textbf{playoff games}, he scored 44 goals (goal scoring rate of $\frac{44}{89} = 0.494$) Clearly, he has a higher goal scoring rate in the playoffs, but can it be explained by the vagaries of random chance? Or is the difference statistically significant?
+   
+   Let $X$ denote the number of goals he scores in the 89 playoff games.  Assume $$X \sim Pois(89 \times \lambda_0)$$ where $\lambda_0$ is his goal scoring rate per game during the playoffs.
+   
+   a. State the null and alternative hypothesis about the value of $\lambda_0$. 
+   
+   b. Calculate the P-value and summarize what you learn from it. Show your code for calculating the P-value. (You do not need to show the entire Poisson distribution)
+   
+   
+2. (Sign test) Suppose $Y_1, Y_2, \dots, Y_{19}$ are independent random variables drawn from some distribution,  and we are interested in the
+parameter $\pi_0 = P(Y < 0)$ More precisely, we want to test $H_0: \pi_0 = 0.4$ against $H_1: \pi_0 < 0.4$.  at an $\alpha$ level of the 0.05.
+
+   A reasonable test statistic would be $X$, the number of negative observations in the sample. That is, 
+$$X = X_1 + X_2 +\dots + X_{19}$$
+   where 
+\begin{align*}
+   X_i &= \left\{ \begin{array}{cc}
+                    1 & Y_i < 0 \\
+                    0 & otherwise \end{array} \right.
+\end{align*}
+
+a. What is the sampling distribution of $X$? Give a brief justification for your answer. 
+
+b. Suppose we decide to reject $H_0$ if the $\mbox{P-value} = P(X \leq x_{obs}) \leq 0.05$. For what values of $x_{obs}$ would you reject $H_0$. Support your answer showing code/output as necessary.
+   
+c. Calculate the probability of committing a Type I error if you use the decision rule from part b. (Don't forget to define what a Type I error is before you do your calculations)
+
+d. Suppose in fact $H_0$ is false and $\pi_0 = 0.2$. Calculate the probability of committing a Type II error if you use the decision rule from part b. Support your answer showing code/output as necessary. (Don't forget to define what a Type II error is before you do your calculations)
+   
+   
+3. (Sign test again) Suppose in problem 2, you know that $Y$ is normally distributed with mean $\mu_0$ and (known) standard deviation $\sigma_0=1$.
+
+a. Re-state the null and alternative hypothesis from problem 2 in terms of claims about $\mu_0$. 
+
+    Hint: $\pi_0 = P(Y < 0) = P( Z < -\mu_0)$ where $Z \sim Norm(0,1)$. So for the null hypothesis, you want to find the value of $\mu_0$ -call it $\mu_0^{null}$ - that will make $\pi_0 = 0.4$. (Think carefully about whether the alternative is of the form $\mu_0 > \mu_0^{null}$ or of the form $\mu_0 < \mu_0^{null}$)
+    
+b. A reasonable test statistic in this problem is $\bar{Y} = \frac{1}{19} \sum\limits_{i=1}^{19}(Y_1+Y_2+\dots+Y_{19})$.  Write the sampling distribution of $\bar{Y}$?
+
+c. We will reject the null hypothesis if the $\mbox{P-value} \leq 0.05$. For what values of $y_{obs}$ will you reject the null hypothesis? State the form of the P-value first. Support your answer showing code/output as necessary.
+
+d. Calculate the probability of committing a Type I error if you use the decision rule from part b. 
+
+e. Suppose in fact $H_0$ is false and $\pi_0 = 0.2$. Calculate the probability of committing a Type II error if you use the decision rule from part b. Support your answer showing code/output as necessary. 
+   
+
+   
