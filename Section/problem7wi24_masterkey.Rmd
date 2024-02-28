@@ -1,0 +1,205 @@
+---
+title: "Problem Section 7"
+date:  "Monday Feb 26 2024"
+graphics: yes
+output: pdf_document
+header-includes:
+    - \usepackage{amsmath, amssymb}
+    - \usepackage{framed}\definecolor{shadecolor}{rgb}{0.949,0.949,0.949}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+### Exercises 
+
+1. We have our observed value as $x=3$. Under the null hypothesis we have that:
+
+$$
+X \sim Binom(n = 10,\pi = 1/6)
+$$
+
+Since we are considering a composite alternative hypothesis, we will conduct a 2 tailed test. 
+
+First we can examine the null binomial PMF:
+
+```{r}
+binom_tibble <- tibble(
+  x = seq(0,10),
+  binom_pmf = dbinom(x,10,1/6)
+)
+
+binom_tibble
+
+#plot PMF
+
+ggplot(data=binom_tibble, aes(x=x,
+                              y=binom_pmf))+
+  geom_col(width = 1)+
+  geom_vline(xintercept=3,col='red')+
+  scale_x_continuous(breaks = 0:10)+
+  labs(y='probability')
+```
+
+
+
+Thus for our 2-sided P-value we would consider the probability of observing data as extreme as ours, or more. We see in the above PMF, that the values that are more extreme (have lower probability) than x=3, are all values greater than 3. Thus for our p-value we are considering:
+
+$$
+p = P(X\geq 3)  = `r pbinom(2,10,1/6, lower.tail = F)`
+$$
+```{r}
+1-pbinom(2,10,1/6)
+```
+
+Thus when the null is true, there is a 22% chance of observing x=3, or more extreme data. This is a relatively high p-value so in general we would not consider it enough information to reject the null hypothesis. 
+Note: you can also automate the two-sided P-value calculation as shown below.
+
+```{r}
+probs <- dbinom(0:10, size = 10, prob = 1/6)
+
+sum(probs[probs <= dbinom(x = 3, size = 10, prob = 1/6)] )
+
+```
+2. 
+
+a. 
+In this setting we would want to see if the observed mean from the 25 basket sample, \$149.75, is large enough to reject the hypothesized mean of \$145.75. Naturally we would form our null and alternative as follows:
+
+$$
+H_0: \mu_0 = 145.75 \ \ H_1: \mu_0 \neq 145.75
+$$
+
+
+b. If we assume that the CLT will apply that means that  we will have that:
+
+$$
+\bar{X} \sim N(\mu = \mu_0, \sigma = \frac{9.5}{\sqrt{25}} = 1.9)
+$$
+
+
+c. Since this is a two-sided alternative, the P-value is 
+$$2 \min\{ P_{\mu_0=145.75}(\bar{X} \leq 149.75), P_{\mu_0=145.75}(\bar{X} \geq 149.75) \}.$$
+
+Since 149.75 is to the right of 145.75 - the mean of the normal distribution when the null hypothesis is true, it is clear that the $\mbox{P-value} = 2 \times P_{\mu_0=145.75}(\bar{X} \geq 149.75)$ as this will be the minimum.
+
+```{r}
+2*pnorm(q = 149.75, mean = 145.75, sd = 9.5/sqrt(25), lower.tail=F)
+```
+
+ Thus when the null is true we see data this unusual or more about 3% of the time. 
+
+
+3. 
+
+a. Since small values of $S$ lie in the direction predicted by $H_1$ (why?), the P-value is 
+    $$\mbox{P-value} = P_{\lambda_0 = 6}(S \leq s_{obs})$$
+    with $S \sim Pois(4 \lambda_0)$.
+    
+    This is calculated below.
+    
+    ```{r}
+    ppois(q = 15, lambda = 4*6)
+    
+    ```
+    
+b.  We will reject for any $s_{obs}$ that satisfies that $P_{\lambda_0 = 6}(S \leq s_{obs}) \leq 0.1$.  Since the Poisson PMF is monotonically decreasing, for large values, we can create the table of Poisson probabilities to find the smallest $s_{obs}$ for which we will reject $H_0$. A more succinct alternative to target the search is to find the 10th percentile of the distribution first.
+    
+    ```{r}
+    
+    qpois(p = 0.1, lambda = 4*6)  #18 has at least 10% probability below it
+    
+    ppois(18, lambda = 24)        #let's see how much exactly 
+    
+    ppois(17, lambda = 24)
+    ```
+    
+    Therefore we would reject $H_0$ for any $s_{obs} \leq 17$ since these values would give a P-value smaller than 0.1.
+   
+c. A Type 1 error occurs when we mistakenly reject $H_0$. That is, we reject $H_0$ even though $H_0$ is true. The probability of a Type I error in this example is $P_{\lambda_0 = 6}(S \leq 17)$.
+    
+    ```{r}
+    ppois(17, lambda = 4*6)
+    
+    ```
+   
+d. A Type II error occurs when we mistakenly fail to reject $H_0$. That is, we do not reject $H_0$ even though $H_1$ is true. The probability of a Type II error is $P_{\lambda_0 = 4}(S > 17)$.
+    
+    ```{r}
+    ppois(16, lambda = 4*4, lower.tail = FALSE)
+    
+    ```
+   
+   
+    
+4.
+
+a. 
+
+```{r include=F}
+    sample_df <- tibble( 
+            x= c(-0.58319935, -1.36090219,  0.38663763, -1.54365592,  
+                 0.87083945, -0.69187830, 0.45898841, -2.82556635,  
+                 0.01777137, -0.62753863 , 0.54611381, -1.39731591, 
+                 -1.72584231,  0.91371529,  0.18096064, -0.53063107, 
+                 -0.76604739, -1.97107704, 0.56394712,  1.13707563))
+    ```
+
+
+    ```{r}
+
+obs_s2 <- sample_df %>% summarise(s2 = var(x)) %>% pull()
+    ```
+
+    The value of $s^2_{obs}$ is `r round(obs_s2,4)`
+
+
+b. 
+
+    ```{r label="gen-null-dist"}
+    set.seed(2626)                       #random number seed
+    B <- 1000                            # number of replications
+nsamp <- nrow(sample_df)                   # sample size n 
+sigma2_null <- 1                     #null value
+
+null_sim_df <- tibble(
+                s2star = replicate(n = B, 
+                         expr = var(rnorm(n = nsamp, 0,sigma2_null))))
+                
+
+
+    ```
+
+
+c. 
+
+    ```{r}
+ggplot(data = null_sim_df,
+       mapping = aes(x = s2star,
+                     y = after_stat(density))) +
+   geom_histogram(binwidth = 0.2,
+                  alpha=0.3,
+                  fill="gold",
+                  color="purple")+
+  geom_vline(xintercept = obs_s2,
+             color="red")+
+  labs(title = "Null distribution of the sample variance estimator",
+       subtitle = "Observed value marked as red line")
+    ```
+
+
+d. Since $S^2$ is unbiased for the true value of $\sigma^2_0$, we should see around 1 when $H_0$ is true and values above 1 when $H_1$ is true. 
+Therefore, the P-value is the probability of seeing a result which is at least as large as our observed result. 
+
+```{r}
+#calculate empirical P-value
+
+pvalue <- null_sim_df %>% 
+            summarise( pvalue = mean(s2star >= obs_s2)) %>% pull()
+
+```
+
+The P-value is `r round(pvalue, 4)`
